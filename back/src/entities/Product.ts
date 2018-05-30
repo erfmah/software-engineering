@@ -16,9 +16,6 @@ export class Product {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: "varchar", length: 50 })
-    sku: string;
-
     @Column({ type: "varchar", length: 200 })
     name: string;
 
@@ -30,8 +27,6 @@ export class Product {
 
     @Column({ type: "text"})
     longDesc: string;
-    
-
 
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
     updateDate: Date;

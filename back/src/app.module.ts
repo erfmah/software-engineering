@@ -4,10 +4,11 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { UserModule } from './user/user.module';
+import { ProductModule } from './product/product.module';
 import {CorsMiddleware} from "./middlewares/cors.middleware";
 
 @Module({
-  imports: [UserModule, AuthModule, TypeOrmModule.forRoot()],
+  imports: [UserModule, AuthModule, ProductModule, TypeOrmModule.forRoot()],
   controllers: [AppController],
   components: [],
 })

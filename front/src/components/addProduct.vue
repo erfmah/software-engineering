@@ -7,7 +7,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productName" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productName" placeholder="Name" v-model="product.Name">
+              <input type="text" class="form-control" id="productName" placeholder="Name" v-model="product.name">
             </div>
           </div>
         </div>
@@ -16,7 +16,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productPrice" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productPrice" placeholder="Price" v-model="product.Price">
+              <input type="text" class="form-control" id="productPrice" placeholder="Price" v-model="product.price">
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productWeight" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productWeight" placeholder="Weight" v-model="product.Weight">
+              <input type="text" class="form-control" id="productWeight" placeholder="Weight" v-model="product.weight">
             </div>
           </div>
         </div>
@@ -34,7 +34,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productCategory_ID" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productCategory_ID" placeholder="Category_ID" v-model="product.Category_ID">
+              <input type="text" class="form-control" id="productCategory_ID" placeholder="Category_ID" v-model="product.category_ID">
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productManufacture_ID" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productManufacture_ID" placeholder="Manufacture_ID" v-model="product.Manufacture_ID">
+              <input type="text" class="form-control" id="productManufacture_ID" placeholder="Manufacture_ID" v-model="product.manufacture_ID">
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productCatDesc" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productCatDesc" placeholder="CatDesc" v-model="product.CatDesc">
+              <input type="text" class="form-control" id="productCatDesc" placeholder="CatDesc" v-model="product.catDesc">
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productShortDesc" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productShortDesc" placeholder="ShortDesc" v-model="product.ShortDesc">
+              <input type="text" class="form-control" id="productShortDesc" placeholder="ShortDesc" v-model="product.shortDesc">
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productLongDesc" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productLongDesc" placeholder="LongDesc" v-model="product.LongDesc">
+              <input type="text" class="form-control" id="productLongDesc" placeholder="LongDesc" v-model="product.longDesc">
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productProduct_Stock" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productProduct_Stock" placeholder="Product_Stock" v-model="product.Product_Stock">
+              <input type="text" class="form-control" id="productProduct_Stock" placeholder="Product_Stock" v-model="product.product_Stock">
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productLive" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productLive" placeholder="Live" v-model="product.Live">
+              <input type="text" class="form-control" id="productLive" placeholder="Live" v-model="product.live">
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productThumb" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productThumb" placeholder="Thumb" v-model="product.Thumb">
+              <input type="text" class="form-control" id="productThumb" placeholder="Thumb" v-model="product.thumb">
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productUpdateDate" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <datepicker placeholder = "UpdateDate" v-model="product.UpdateDate"></datepicker>
+              <datepicker placeholder = "UpdateDate" v-model="product.updateDate"></datepicker>
             </div>
           </div>
         </div>
@@ -131,29 +131,29 @@
     data (){
       return {
         product: {
-          Category_ID: '',
-          Manufacture_ID: '',
-          Name: '',
-          Price: '',
-          Weight: '',         
-          CatDesc: '',
-          ShortDesc: '',
-          LongDesc: '',
-          Thumb: '',
-          UpdateDate: '',
-          Live: '',
-          Product_Stock:''
+          category_ID: '',
+          manufacture_ID: '',
+          name: '',
+          price: '',
+          weight: '',         
+          catDesc: '',
+          shortDesc: '',
+          longDesc: '',
+          thumb: '',
+          updateDate: '',
+          live: '',
+          product_Stock:''
         }
       }
     },
     computed: {
       ...mapActions({
-        UserReg: 'UserReg',
+        ProductAdd: 'ProductAdd',
       })
     },
     methods:{
       addProduct(){
-        this.$store.dispatch('UserReg', this.product);
+        this.$store.dispatch('ProductAdd', this.product);
       }
     }
   }

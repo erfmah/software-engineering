@@ -9,9 +9,9 @@ const profile = {
     'firstName': 'MOrteza',
     'lastName': 'Montana',
     'limit': 850.00
-  }
-  
-  const products = [
+}
+
+const products = [
     { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01, 'inventory': 2, 'shipping': 15.00 },
     { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99, 'inventory': 10, 'shipping': 5.00 },
     { 'id': 3, 'title': 'Nirvana - LP', 'price': 19.99, 'inventory': 3, 'shipping': 22.50 },
@@ -24,14 +24,14 @@ const profile = {
     { 'id': 10, 'title': 'Handcrafted Soft Salad', 'price': 13.99, 'inventory': 3, 'shipping': 3.50 },
     { 'id': 11, 'title': 'Incredible Steel Bacon', 'price': 30.99, 'inventory': 5, 'shipping': 7.90 },
     { 'id': 12, 'title': 'Tasty Plastic Bike', 'price': 75.00, 'inventory': 5, 'shipping': 25.00 }
-  ]
-  
-  const promotions = [
+]
+
+const promotions = [
     { 'id': 1, 'title': '30% OFF' },
     { 'id': 2, 'title': '$100.00 Discount' },
     { 'id': 3, 'title': 'Free Shipping' },
     { 'id': 4, 'title': '+ $100.00 on limit' }
-  ]
+]
 
 
 var instance = axios.create();
@@ -49,15 +49,18 @@ export default {
     localReg: function(data) { // user registration must match our server
         return Vue.axios.post(base + 'user/create', data)
     },
-    getProfile (cb) {
+    localAddProduct: function(data) { // product add
+        return Vue.axios.post(base + 'product/create', data)
+    },
+    getProfile(cb) {
         setTimeout(() => cb(profile), 200)
     },
 
-    getProducts (cb) {
+    getProducts(cb) {
         setTimeout(() => cb(products), 200)
     },
 
-    getPromotions (cb) {
+    getPromotions(cb) {
         setTimeout(() => cb(promotions), 200)
     }
 }
