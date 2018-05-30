@@ -5,8 +5,12 @@ import * as bcrypt from 'bcrypt';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly userService: ProductService) {}
+  constructor(private readonly productService: ProductService) {}
   
+  @Post('create')
+  async createProduct(@Body() data, @Res() res): Promise<any> {
+    
+  }
 
 
 }

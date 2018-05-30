@@ -11,11 +11,8 @@ export class ProductService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  async createUser(data): Promise<Product> {
+  async createProduct(data): Promise<Product> {
     const product = new Product();
-
-    
-
     try {
         return await this.productRepository.save(product);
     } catch(e) {
