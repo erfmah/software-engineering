@@ -17,11 +17,14 @@ export class CategoryService {
     try {
         return await this.categoryRepository.save(category);
     } catch(e) {
-        console.log(e)
+      console.log(e)
         return null;
     }
   }
 
+  async findByName(name): Promise<Category> {
+    return await this.categoryRepository.findOne({name});
+ }
   async all(): Promise<Category[]> {
     return await this.categoryRepository.find();
   }
