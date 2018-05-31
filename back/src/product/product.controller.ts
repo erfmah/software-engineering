@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus     } from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus, Req } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { AuthService } from '../auth/auth.service'
 import * as bcrypt from 'bcrypt';
@@ -33,8 +33,8 @@ export class ProductController {
   }
 
   @Post('wish')
-  async addProductToWishList(@Body() data, @Res() res): Promise<any> {
-    let wishItem = await this.productService.addToWishList(data['user'], data['product'])
+  async addProductToWishList(@Body() data, @Res() res, @Req() req): Promise<any> {
+    let wishItem = await this.productService.addToWishList(req.user.user.id, data['product'])
     if(wishItem == null) {
       let result = {};
       result['data'] = {};
@@ -44,8 +44,10 @@ export class ProductController {
       let result = {};
       result['data'] = {};
       result['data']['wishToBuy'] = wishItem;
+      console.log(wishItem)
       result['status'] = "success";
       res.status(HttpStatus.OK).json(result);
     }
   }
+  
 }

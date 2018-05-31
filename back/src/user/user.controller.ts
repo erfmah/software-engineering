@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus} from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus, Req} from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service'
 import * as bcrypt from 'bcrypt';
@@ -66,6 +66,25 @@ export class UserController {
       
       res.status(code).json(result);
   }
+
+  @Post('address')
+  async addProductToWishList(@Body() data, @Res() res, @Req() req): Promise<any> {
+    let address = await this.userService.addAddress(data['city'], data['address'], data['zip'], data['phone'],req.user.user.id)
+    if(address == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "address_already_exist_in_user_information";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['address'] = address;
+      console.log(address)
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
+
   
 
 

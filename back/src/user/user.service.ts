@@ -2,6 +2,8 @@ import { Component, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entities/User';
+import { Address } from '../entities/Address';
+import { Order } from '../entities/Order';
 import * as bcrypt from 'bcrypt';
 
 @Component()
@@ -9,6 +11,10 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(Address)
+    private readonly addressRepository: Repository<Address>,
+    @InjectRepository(Order)
+    private readonly orderRepository: Repository<Order>
   ) {}
 
   async createUser(data): Promise<User> {
@@ -32,7 +38,6 @@ export class UserService {
     }
   }
 
-
   async findByPhone(phone): Promise<User> {
     return await this.userRepository.findOne({phone});
   }
@@ -50,4 +55,22 @@ export class UserService {
       }
     }
   }
+
+  async addAddress(city, address, zip, phone, user): Promise<Address> {
+    if(await this.addressRepository.count({user, zip}) != 0)
+      return null;
+    const newAddress = new Address();
+    newAddress.address = address;
+    newAddress.city = city;
+    newAddress.phone = phone;
+    newAddress.user = user;
+    try {
+      return await this.addressRepository.save(newAddress);
+    } catch(e) {
+    console.log(e)
+      return null;
+    }  
+  }
+  
+  
 }

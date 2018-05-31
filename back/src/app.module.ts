@@ -6,8 +6,9 @@ import { Connection } from 'typeorm';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
+import { ManufacturerModule} from './manufacturer/manufacturer.module'
 @Module({
-  imports: [UserModule, AuthModule, ProductModule, CategoryModule, TypeOrmModule.forRoot()],
+  imports: [UserModule, AuthModule, ProductModule, CategoryModule, ManufacturerModule, TypeOrmModule.forRoot()],
   controllers: [AppController],
   components: [],
 })

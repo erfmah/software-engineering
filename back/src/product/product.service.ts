@@ -15,6 +15,8 @@ export class ProductService {
     private readonly productRepository: Repository<Product>,
     @InjectRepository(WishToBuy)
     private readonly wishToBuyRepository: Repository<WishToBuy>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>
   ) {}
 
   async createProduct(data): Promise<Product> {
@@ -55,7 +57,7 @@ export class ProductService {
     wishList.product = product;
     wishList.user = user;
     try {
-      return await this.productRepository.save(wishList);
+      return await this.wishToBuyRepository.save(wishList);
     } catch(e) {
     console.log(e)
       return null;
