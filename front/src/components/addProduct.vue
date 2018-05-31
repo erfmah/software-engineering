@@ -33,8 +33,9 @@
                 <div class="form-group">
           <div class="col-xs-12">
             <div class="control-wrapper">
-              <label for="productCategory_ID" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productCategory_ID" placeholder="Category_ID" v-model="product.category_ID">
+              <label for="productCategory_ID" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>              <select class="form-control" id="productCategory_ID" placeholder="Category_ID" v-model="product.Category_ID">
+                <option v-for="cat in categories" :value="cat.id">{{ cat.name }}</option>
+              </select>
             </div>
           </div>
         </div>
@@ -126,7 +127,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapState } from 'vuex'
   export default {
     data (){
       return {
@@ -146,15 +147,14 @@
         }
       }
     },
-    computed: {
-      ...mapActions({
-        ProductAdd: 'ProductAdd',
-      })
-    },
-    methods:{
-      addProduct(){
-        this.$store.dispatch('ProductAdd', this.product);
-      }
+    computed: mapState({
+      categories: state => state.admin.categories
+    }),
+    methods: mapActions([
+      'getCategories'
+    ]),
+    created(){
+      this.getCategories()
     }
   }
 

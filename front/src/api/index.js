@@ -43,11 +43,17 @@ export default {
     localLogin: function(data) {
         return Vue.axios.post(base + 'user/login', data)
     },
+    localAddCat: function(data) {
+        return Vue.axios.post(base + 'category/create', data)
+    },
     // localLogout: function(data) {
     //     return instance.post(base + 'user/logout', data)
     // },
     localReg: function(data) { // user registration must match our server
         return Vue.axios.post(base + 'user/create', data)
+    },
+    localGetAllCats: function() { // user registration must match our server
+        return Vue.axios.get(base + 'category/all')
     },
     localAddProduct: function(data) { // product add
         return Vue.axios.post(base + 'product/create', data)
@@ -55,7 +61,6 @@ export default {
     getProfile(cb) {
         setTimeout(() => cb(profile), 200)
     },
-
     getProducts(cb) {
         setTimeout(() => cb(products), 200)
     },

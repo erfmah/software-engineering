@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, UseGuards, Body, Headers, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -11,7 +11,7 @@ export class AuthController {
   }
 
   @Get('authorized')
-  async findAll(): Promise<any> {
+  async findAll(@Req() data): Promise<any> {
     // this route is restricted
   }
 }

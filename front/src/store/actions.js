@@ -1,5 +1,6 @@
 import api from '../api'
-import { USER_SIGNIN, USER_SIGNOUT, USER_REG, PRODUCT_ADD } from './types'
+import { USER_SIGNIN, USER_SIGNOUT, USER_REG, ADD_CAT, RECIEVE_CATEGORIES, PRODUCT_ADD } from './types'
+
 
 export const UserLogin = ({ commit }, data) => {
     api.localLogin(data).then(function(response) {
@@ -13,6 +14,19 @@ export const UserLogin = ({ commit }, data) => {
         .catch(function(error) {
             console.log(error);
         });
+};
+
+export const AddCat = ({ commit }, data) => {
+  api.localAddCat(data).then(function(response) {
+          if (response.data.status == "success") {
+              window.location = '/AddCat'
+          } else {
+              window.location = '/AddCat'
+          }
+      })
+      .catch(function(error) {
+          console.log(error);
+      });
 };
 
 export const UserLogout = ({ commit }, data) => {
@@ -80,3 +94,9 @@ export const removeFromCart = ({ commit }, product) => {
 export const toggleCoupon = ({ commit }, coupon) => {
     commit('TOGGLE_COUPON', coupon)
 }
+  
+  export const getCategories = ({ commit },) => {
+    const cats = api.localGetAllCats().then(function(cats){
+        commit (RECIEVE_CATEGORIES, cats.data)
+    })
+  }

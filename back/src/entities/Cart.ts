@@ -8,8 +8,8 @@ export class Cart {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: "timestamp"})
-    date: number;
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
+    date: Date;
 
     @Column({ type: "tinyint", precision: 1})
     active: boolean;

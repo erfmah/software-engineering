@@ -16,6 +16,7 @@ import './assets/css/font-awesome.min.css'
 import store from './store/index'
 import Shop from './components/shop/Shop'
 import AddProduct from './components/addProduct'
+import AddCategory from './components/AddCategory'
 
 Vue.config.productionTip = false
 
@@ -43,6 +44,9 @@ const routes = [{
 },{
   path : '/addProduct',
   component : AddProduct
+},{
+  path : '/AddCategory',
+  component : AddCategory
 },{
   path : '*',
   component : Home
