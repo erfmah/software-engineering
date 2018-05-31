@@ -7,6 +7,7 @@
     <router-link to="/reg" v-if="!user">register</router-link>
     <router-link to="/shop" v-else >Shop</router-link>
     <router-link to="/addProduct">Add Product</router-link>
+    <router-link to="/AddCategory">Add Category</router-link>
     <a href="javascript:void(0)"  @click="logout" >logout</a>
   </div>
 </template>

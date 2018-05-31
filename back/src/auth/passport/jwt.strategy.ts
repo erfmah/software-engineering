@@ -18,10 +18,12 @@ export class JwtStrategy extends Strategy {
   }
 
   public async verify(req, payload, done) {
-    const isValid = await this.authService.validateUser(payload);
-    if (!isValid) {
+    const user = await this.authService.validateUser(payload);
+    if (user) { 
+      return done(null, payload);
+    } else {
       return done('Unauthorized', false);
     }
-    done(null, payload);
+    
   }
 }
