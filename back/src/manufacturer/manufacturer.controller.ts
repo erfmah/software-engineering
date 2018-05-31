@@ -8,7 +8,7 @@ export class ManufacturerController {
   constructor(private readonly manufacturerService: ManufacturerService) {}
   
   @Post('create')
-  async createProduct(@Body() data, @Res() res): Promise<any> {
+  async createManufacturer(@Body() data, @Res() res): Promise<any> {
     let manufacturer_already = await this.manufacturerService.findByName(data ['name'])
     if(manufacturer_already) {
       let result = {};
