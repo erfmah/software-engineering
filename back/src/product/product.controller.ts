@@ -30,11 +30,22 @@ export class ProductController {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(result);
        }
     }
-
-
-
-
   }
 
-
+  @Post('wish')
+  async addProductToWishList(@Body() data, @Res() res): Promise<any> {
+    let wishItem = await this.productService.addToWishList(data['user'], data['product'])
+    if(wishItem == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "product_already_exist_in_wishList";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['wishToBuy'] = wishItem;
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
 }

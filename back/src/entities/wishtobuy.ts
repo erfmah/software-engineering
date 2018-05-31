@@ -8,7 +8,7 @@ export class WishToBuy {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: "timestamp"})
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
     date: Date;
 
     @ManyToOne(type => User, user => user.wishlist)
