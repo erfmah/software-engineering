@@ -34,7 +34,7 @@ export class UserService {
 
 
   async findByPhone(phone): Promise<User> {
-    return await this.userRepository.findOne({phone: phone});
+    return await this.userRepository.findOne({phone});
   }
 
   async authorize(phone, password): Promise<boolean> {

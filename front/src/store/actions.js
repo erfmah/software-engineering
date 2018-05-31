@@ -1,5 +1,6 @@
 import api from '../api'
-import { USER_SIGNIN, USER_SIGNOUT, USER_REG, ADD_CAT, RECIEVE_CATEGORIES } from './types'
+import { USER_SIGNIN, USER_SIGNOUT, USER_REG, ADD_CAT, RECIEVE_CATEGORIES, PRODUCT_ADD } from './types'
+
 
 export const UserLogin = ({ commit }, data) => {
     api.localLogin(data).then(function(response) {
@@ -29,8 +30,8 @@ export const AddCat = ({ commit }, data) => {
 };
 
 export const UserLogout = ({ commit }, data) => {
-        commit(USER_SIGNOUT);
-        window.location = '/login'
+    commit(USER_SIGNOUT);
+    window.location = '/login'
 };
 
 export const UserReg = ({ commit }, data) => {
@@ -47,37 +48,52 @@ export const UserReg = ({ commit }, data) => {
         });
 };
 
+
+export const ProductAdd = ({ commit }, data) => {
+    api.localAddProduct(data).then(function(response) {
+            if (response.data.status == "success") {
+                commit(PRODUCT_ADD, response.data.data);
+                window.location = '/addProduct'
+            } else {
+                window.location = '/addProduct'
+            }
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+};
+
 export const getProfile = ({ commit }) => {
-      let profile = localStorage.getItem("user")
-      profile = JSON.parse(profile)
-      commit('RECEIVE_PROFILE', profile)
-  }
-  
-  export const getProducts = ({ commit }) => {
+    let profile = localStorage.getItem("user")
+    profile = JSON.parse(profile)
+    commit('RECEIVE_PROFILE', profile)
+}
+
+export const getProducts = ({ commit }) => {
     api.getProducts(products => {
-      commit('RECEIVE_PRODUCTS', products)
+        commit('RECEIVE_PRODUCTS', products)
     })
-  }
-  
-  export const getPromotions = ({ commit }) => {
+}
+
+export const getPromotions = ({ commit }) => {
     api.getPromotions(promotions => {
-      commit('RECEIVE_PROMOTIONS', promotions)
+        commit('RECEIVE_PROMOTIONS', promotions)
     })
-  }
-  
-  export const addToCart = ({ commit }, product) => {
+}
+
+export const addToCart = ({ commit }, product) => {
     if (product.inventory > 0) {
-      commit('ADD_TO_CART', product.id)
+        commit('ADD_TO_CART', product.id)
     }
-  }
-  
-  export const removeFromCart = ({ commit }, product) => {
+}
+
+export const removeFromCart = ({ commit }, product) => {
     commit('REMOVE_FROM_CART', product)
-  }
-  
-  export const toggleCoupon = ({ commit }, coupon) => {
+}
+
+export const toggleCoupon = ({ commit }, coupon) => {
     commit('TOGGLE_COUPON', coupon)
-  }
+}
   
   export const getCategories = ({ commit },) => {
     const cats = api.localGetAllCats().then(function(cats){
