@@ -12,7 +12,7 @@ export class Order {
     @Column({ type: "float"})
     amount: number;
 
-    @Column({ type: "float"})
+    @Column({ type: "float", default: () => "100000"})
     shipping: number;
 
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
@@ -21,7 +21,7 @@ export class Order {
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
     shippingDate: Date;
 
-    @Column({ type: "tinyint", precision: 1})
+    @Column({ type: "tinyint", precision: 1 , default: () => 0})
     shipped: boolean;
 
     @Column({ type: "tinyint", precision: 1})

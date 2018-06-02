@@ -50,7 +50,7 @@ export class ProductService {
     return await this.productRepository.find({manufacturer});
   }
 
-  async addToWishList (user , product): Promise<WishToBuy>{
+  async addToWishList(user , product): Promise<WishToBuy> {
     if(await this.wishToBuyRepository.count({user, product}) != 0)
       return null;
     const wishList = new WishToBuy();
@@ -62,6 +62,12 @@ export class ProductService {
     console.log(e)
       return null;
     }  
+  }
+
+  async removeFromWishList(wish): Promise<WishToBuy> {
+    const wishList = await this.wishToBuyRepository.findOne({id: wish})
+    const removedWish = await this.wishToBuyRepository.remove(wishList)
+    return removedWish 
   }
 
 }

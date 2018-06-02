@@ -67,8 +67,8 @@ export class UserController {
       res.status(code).json(result);
   }
 
-  @Post('address')
-  async addProductToWishList(@Body() data, @Res() res, @Req() req): Promise<any> {
+  @Post('addAddress')
+  async addAddress(@Body() data, @Res() res, @Req() req): Promise<any> {
     let address = await this.userService.addAddress(data['city'], data['address'], data['zip'], data['phone'],req.user.user.id)
     if(address == null) {
       let result = {};
@@ -85,6 +85,23 @@ export class UserController {
     }
   }
 
+  @Post('removeAddress')
+  async removeAddress(@Body() data, @Res() res): Promise<any> {
+    let address = await this.userService.removeAddress(data['id'])
+    if(address == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "address_does_not_exist_in_repository";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['address'] = address;
+      console.log(address)
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
   
 
 
