@@ -12,7 +12,7 @@ import { AuthController } from './auth.controller';
 import { User } from '../entities/User';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Address } from 'entities/Address';
-
+import { Order } from 'entities/Order';
 
 @Module({
   imports: [  TypeOrmModule.forFeature([User, Address]) ],
@@ -25,6 +25,7 @@ export class AuthModule implements NestModule {
       .apply(passport.authenticate('jwt', { session: false }))
       .forRoutes({ path: '/product/wish', method: RequestMethod.ALL },
       { path: '/user/addAddress', method: RequestMethod.ALL },
+      { path: '/order/create', method: RequestMethod.ALL },
       { path: '/cart/add', method: RequestMethod.ALL });
   }
 }

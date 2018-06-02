@@ -44,7 +44,6 @@ export class ProductController {
       let result = {};
       result['data'] = {};
       result['data']['wishToBuy'] = wishItem;
-      console.log(wishItem)
       result['status'] = "success";
       res.status(HttpStatus.OK).json(result);
     }
@@ -62,10 +61,60 @@ export class ProductController {
       let result = {};
       result['data'] = {};
       result['data']['wishToBuy'] = removedWish;
-      console.log(removedWish)
       result['status'] = "success";
       res.status(HttpStatus.OK).json(result);
     }
   }
   
+  @Post('findByManufacturer')
+  async findProductsByManufacturer(@Body() data, @Res() res): Promise<any> {
+    let products = await this.productService.findByManufacturer(data['manufacturer'])
+    if(products == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "there_is_no_product";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['manufacturer'] = products;
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
+
+  @Post('findByCategory')
+  async findProductsByCategory(@Body() data, @Res() res): Promise<any> {
+    let products = await this.productService.findByCategory(data['category'])
+    if(products == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "there_is_no_product";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['category'] = products;
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
+
+  @Post('searchByName')
+  async searchByName(@Body() data, @Res() res): Promise<any> {
+    let products = await this.productService.searchByName(data['name'])
+    if(products == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "there_is_no_product";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['name'] = products;
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
+
 }

@@ -11,7 +11,9 @@ export class CartService {
   constructor(
     @InjectRepository(Cart)
     private readonly cartRepository: Repository<Cart>,
+    @InjectRepository(CartDetails)
     private readonly cartDetailsRepository: Repository<CartDetails>,
+    @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
   ) {}
 
@@ -27,9 +29,9 @@ export class CartService {
   async findActiveCarts(): Promise<Cart> {
     const now = new Date()
     const carts = await this.cartRepository.createQueryBuilder("cart")
-                                      .where("cart.end > :now AND ", {now: now})
+                                      .where("cart.end > :now ", {now: now})
                                       .andWhere("active = 1")
-                                      .orderBy("id", "DESC")
+                                      .orderBy("cart.id", "DESC")
                                       .limit(1)
                                       .leftJoinAndSelect("cart.cartDetails", "CartDetails")
                                       .getOne()
@@ -90,6 +92,7 @@ export class CartService {
 
   async addToCart(product, user): Promise<CartDetails> {
     const cart = await this.createCart(user)
+    const foundedProduct = await this.productRepository.findOne({id: product})
     if (cart) {
       const cartDetail = await this.cartDetailsRepository.findOne({cart, product})
       if (cartDetail) {
@@ -103,8 +106,8 @@ export class CartService {
       } else {
         const newCartDetail = new CartDetails()
         newCartDetail.cart = cart
-        newCartDetail.price = product.price
-        newCartDetail.product = product
+        newCartDetail.price = foundedProduct.price
+        newCartDetail.product = foundedProduct
         newCartDetail.quantity = 1
         try {
           return await this.cartDetailsRepository.save(newCartDetail)
@@ -120,7 +123,7 @@ export class CartService {
   }
 
   async createCart(user): Promise<Cart> {
-    const carts = this.findActiveCarts()
+    const carts = await this.findActiveCarts()
     if (carts) {
       return carts;
     } else {
