@@ -64,7 +64,7 @@ export class UserService {
     try {
       return await this.addressRepository.save(newAddress);
     } catch(e) {
-    console.log(e)
+      console.log(e)
       return null;
     }  
   }

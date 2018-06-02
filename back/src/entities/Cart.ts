@@ -11,7 +11,7 @@ export class Cart {
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
     date: Date;
 
-    @Column({ type: "tinyint", precision: 1})
+    @Column({ type: "tinyint", precision: 1, default: () => 1})
     active: boolean;
 
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
@@ -23,6 +23,6 @@ export class Cart {
     @OneToMany(type => CartDetails, cartDetails => cartDetails.cart)
     cartDetails: CartDetails[];
 
-    @ManyToOne(type => User, user => user.orders)
+    @ManyToOne(type => User, user => user.carts)
     user: User;
 }
