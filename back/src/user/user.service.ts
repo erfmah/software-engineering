@@ -1,6 +1,6 @@
 import { Component, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult } from 'typeorm';
 import { User } from '../entities/User';
 import { Address } from '../entities/Address';
 import * as bcrypt from 'bcrypt';
@@ -58,6 +58,7 @@ export class UserService {
       return null;
     const newAddress = new Address();
     newAddress.address = address;
+    newAddress.zip = zip;
     newAddress.city = city;
     newAddress.phone = phone;
     newAddress.user = user;
@@ -67,6 +68,12 @@ export class UserService {
     console.log(e)
       return null;
     }  
+  }
+
+  async removeAddress(address): Promise<Address> {
+    const adrs = await this.addressRepository.findOne({id: address})
+    const removedAddress = await this.addressRepository.remove(adrs)
+    return removedAddress
   }
   
   

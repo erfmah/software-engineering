@@ -32,8 +32,8 @@ export class ProductController {
     }
   }
 
-  @Post('wish')
-  async addProductToWishList(@Body() data, @Res() res, @Req() req): Promise<any> {
+  @Post('addWish')
+  async addToWishList(@Body() data, @Res() res, @Req() req): Promise<any> {
     let wishItem = await this.productService.addToWishList(req.user.user.id, data['product'])
     if(wishItem == null) {
       let result = {};
@@ -45,6 +45,24 @@ export class ProductController {
       result['data'] = {};
       result['data']['wishToBuy'] = wishItem;
       console.log(wishItem)
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
+
+  @Post('removeWish')
+  async removeFromWishList(@Body() data, @Res() res): Promise<any> {
+    let removedWish = await this.productService.removeFromWishList(data['id'])
+    if(removedWish == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "product_does_not_exist_in_wishList";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['wishToBuy'] = removedWish;
+      console.log(removedWish)
       result['status'] = "success";
       res.status(HttpStatus.OK).json(result);
     }
