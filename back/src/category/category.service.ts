@@ -9,7 +9,7 @@ export class CategoryService {
   constructor(
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
-  ) {}
+  ) {}  
 
   async createCategory(data): Promise<Category> {
     const category = new Category();

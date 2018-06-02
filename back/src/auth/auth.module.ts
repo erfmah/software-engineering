@@ -11,10 +11,11 @@ import { JwtStrategy } from './passport/jwt.strategy';
 import { AuthController } from './auth.controller';
 import { User } from '../entities/User';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Address } from 'entities/Address';
 
 
 @Module({
-  imports: [  TypeOrmModule.forFeature([User]) ],
+  imports: [  TypeOrmModule.forFeature([User, Address]) ],
   components: [UserService, AuthService, JwtStrategy],
   controllers: [AuthController],
 })

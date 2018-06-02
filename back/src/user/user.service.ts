@@ -3,18 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entities/User';
 import { Address } from '../entities/Address';
-import { Order } from '../entities/Order';
 import * as bcrypt from 'bcrypt';
 
 @Component()
 export class UserService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
     @InjectRepository(Address)
     private readonly addressRepository: Repository<Address>,
-    @InjectRepository(Order)
-    private readonly orderRepository: Repository<Order>
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>
   ) {}
 
   async createUser(data): Promise<User> {

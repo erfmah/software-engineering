@@ -18,7 +18,7 @@
             <router-link to="/" class="btn btn-default">Home</router-link>
           </div>
         </div>
-      </form>s
+      </form>
     </div>
   </div>
 </template>

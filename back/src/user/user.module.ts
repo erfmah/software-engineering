@@ -8,7 +8,7 @@ import { Address } from '../entities/Address';
 import { Order } from '../entities/Order';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Order, Address, User])],
+  imports: [TypeOrmModule.forFeature([Address, User])],
   components: [UserService, AuthService],
   controllers: [UserController],
 })
