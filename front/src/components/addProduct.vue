@@ -33,9 +33,8 @@
                 <div class="form-group">
           <div class="col-xs-12">
             <div class="control-wrapper">
-              <label for="productCategory_ID" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>              <select class="form-control" id="productCategory_ID" placeholder="Category_ID" v-model="product.Category_ID">
-                <option v-for="cat in categories" :value="cat.id">{{ cat.name }}</option>
-              </select>
+              <label for="productCategory_ID" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
+              <input type="text" class="form-control" id="productCategory_ID" placeholder="Category_ID" v-model="product.category">
             </div>
           </div>
         </div>
@@ -44,7 +43,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productManufacture_ID" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productManufacture_ID" placeholder="Manufacture_ID" v-model="product.manufacture_ID">
+              <input type="text" class="form-control" id="productManufacture_ID" placeholder="Manufacture_ID" v-model="product.manufacturer">
             </div>
           </div>
         </div>
@@ -82,7 +81,7 @@
           <div class="col-xs-12">
             <div class="control-wrapper">
               <label for="productProduct_Stock" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
-              <input type="text" class="form-control" id="productProduct_Stock" placeholder="Product_Stock" v-model="product.product_Stock">
+              <input type="text" class="form-control" id="productProduct_Stock" placeholder="Product_Stock" v-model="product.productStock">
             </div>
           </div>
         </div>
@@ -127,13 +126,13 @@
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex'
+  import { mapActions } from 'vuex'
   export default {
     data (){
       return {
         product: {
-          category_ID: '',
-          manufacture_ID: '',
+          category: '',
+          manufacturer: '',
           name: '',
           price: '',
           weight: '',         
@@ -143,10 +142,11 @@
           thumb: '',
           updateDate: '',
           live: '',
-          product_Stock:''
+          productStock:''
         }
       }
     },
+<<<<<<< HEAD
     computed: mapState({
       categories: state => state.admin.categories
     }),
@@ -163,6 +163,18 @@
          addProduct(){
         this.$store.dispatch('ProductAdd', this.product);
       }
+=======
+    computed: {
+      ...mapActions({
+        ProductAdd: 'ProductAdd',
+      })
+    },
+    methods:{
+      addProduct(){
+        this.$store.dispatch('ProductAdd', this.product);
+      }
+    }
+>>>>>>> 48b0f434aaf77f614db69632106236b4b280c53d
   }
 
 </script>

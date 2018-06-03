@@ -50,6 +50,7 @@ export const UserReg = ({ commit }, data) => {
 
 
 export const ProductAdd = ({ commit }, data) => {
+    console.log(data)
     api.localAddProduct(data).then(function(response) {
             if (response.data.status == "success") {
                 commit(PRODUCT_ADD, response.data.data);

@@ -17,7 +17,7 @@ export class Cart {
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
     end: Date;
 
-    @Column({ type: "float"})
+    @Column({ type: "float", default: () => 0})
     amount: number;
 
     @OneToMany(type => CartDetails, cartDetails => cartDetails.cart)

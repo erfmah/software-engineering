@@ -70,4 +70,10 @@ export class ProductService {
     return removedWish 
   }
 
+  async searchByName(name): Promise<Product[]> {
+    return await this.productRepository.createQueryBuilder("product")
+                                       .where("product.name like :name", {name: '%' + name + '%' })
+                                       .getMany();
+  }
+
 }
