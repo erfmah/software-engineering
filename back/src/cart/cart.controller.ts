@@ -8,18 +8,29 @@ export class CartController {
 
   @Post('add')
   async addToCart(@Body() data, @Res() res, @Req() req): Promise<any> {
-    let data_of = await this.cartService.addToCart(data['product'], req.user.user.id);
-    if (data_of != null) {
-        let result = {};
-        result['data'] = {};
-        result['data'] = data_of;
-        result['status'] = "success";
-        res.status(HttpStatus.OK).json(result);
+    if (! await this.cartService.possibleToBuy(data['product'])) {
+      await this.cartService.freeNotUsedCarts()
+    }
+    if (! await this.cartService.possibleToBuy(data['product'])) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "low_quantity";
+      res.status(HttpStatus.OK).json(result);
     } else {
-        let result = {};
-        result['data'] = {};
-        result['status'] = "failed";
-        res.status(HttpStatus.BAD_REQUEST).json(result);
+      let data_of = await this.cartService.addToCart(data['product'], req.user.user.id);
+      if (data_of != null) {
+          await this.cartService.computeCartAmount(data_of.id);
+          let result = {};
+          result['data'] = {};
+          result['data'] = data_of;
+          result['status'] = "success";
+          res.status(HttpStatus.OK).json(result);
+      } else {
+          let result = {};
+          result['data'] = {};
+          result['status'] = "failed";
+          res.status(HttpStatus.BAD_REQUEST).json(result);
+      }
     }
   }
 

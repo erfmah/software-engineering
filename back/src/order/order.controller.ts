@@ -8,7 +8,7 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) {}
   
   @Post('create')
-  async createProduct(@Body() data, @Res() res): Promise<any> {
+  async createOrder(@Body() data, @Res() res): Promise<any> {
 
 
     let data_of = await this.orderService.createOrder(data['cartId'], data['address'], data['paymentMethod']);

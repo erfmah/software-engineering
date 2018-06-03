@@ -9,6 +9,7 @@ import { Cart } from 'entities/Cart';
 import { OrderDetails } from 'entities/OrderDetails'
 import { Address} from 'entities/Address'
 import { CartDetails } from 'entities/CartDetails';
+import { timingSafeEqual } from 'crypto';
 @Component()
 export class OrderService {
   constructor(
@@ -42,28 +43,35 @@ export class OrderService {
       await this.orderRepository.save(order);
     } catch(e) {
       console.log(e)
-        return null;
+      return null;
     }
     for (let c of cart_details){
-        const o = new OrderDetails()
-        o.price = c.price;
-        o.product = c.product
-        o.quantity = c.quantity
-        o.order = order
-        try {
-          await this.orderDetailsRepository.save(o)
-        } catch(e) {
-          console.log(e)
-            return null;
-        }
-        order_details.push(o)
+      const o = new OrderDetails()
+      o.price = c.price;
+      o.product = c.product
+      o.quantity = c.quantity
+      o.order = order
+      try {
+        await this.orderDetailsRepository.save(o)
+      } catch(e) {
+        console.log(e)
+        return null;
+      }
+      order_details.push(o)
     }
     order.orderDetails = order_details
-    await this.orderRepository.save(order);
+    cart.ordered = true
+    try {
+      await this.cartRepository.save(cart)
+      await this.orderRepository.save(order);
+    } catch(e) {
+      console.log(e)
+      return null;
+    }
     return order
   }
 
-  async findOrder(cartId): Promise<Order> {
+  async findOrder(orderId): Promise<Order> {
       return await this.orderRepository.findOne({id: orderId})
   }
 

@@ -14,6 +14,9 @@ export class Cart {
     @Column({ type: "tinyint", precision: 1, default: () => 1})
     active: boolean;
 
+    @Column({ type: "tinyint", precision: 1, default: () => 0})
+    ordered: boolean;
+
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
     end: Date;
 
