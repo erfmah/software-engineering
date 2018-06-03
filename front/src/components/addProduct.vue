@@ -150,12 +150,19 @@
     computed: mapState({
       categories: state => state.admin.categories
     }),
+     ...mapActions({
+        ProductAdd: 'ProductAdd',
+      })
+    }
     methods: mapActions([
       'getCategories'
-    ]),
+    ]),    
     created(){
       this.getCategories()
-    }
+    },
+         addProduct(){
+        this.$store.dispatch('ProductAdd', this.product);
+      }
   }
 
 </script>
