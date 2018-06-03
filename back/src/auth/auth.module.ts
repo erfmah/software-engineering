@@ -13,7 +13,8 @@ import { User } from '../entities/User';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Address } from 'entities/Address';
 import { Order } from 'entities/Order';
-
+import { ProductProperty} from 'entities/ProductProperty'
+import { Category } from 'entities/Category'
 @Module({
   imports: [  TypeOrmModule.forFeature([User, Address]) ],
   components: [UserService, AuthService, JwtStrategy],
@@ -26,6 +27,9 @@ export class AuthModule implements NestModule {
       .forRoutes({ path: '/product/wish', method: RequestMethod.ALL },
       { path: '/user/addAddress', method: RequestMethod.ALL },
       { path: '/order/create', method: RequestMethod.ALL },
+      { path: '/productProperty/create', method: RequestMethod.ALL },
+      { path: '/productProperty/add', method: RequestMethod.ALL },
+      { path: '/productProperty/searchByProperty', method: RequestMethod.ALL },
       { path: '/cart/add', method: RequestMethod.ALL });
   }
 }

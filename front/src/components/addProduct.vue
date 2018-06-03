@@ -146,24 +146,6 @@
         }
       }
     },
-<<<<<<< HEAD
-    computed: mapState({
-      categories: state => state.admin.categories
-    }),
-     ...mapActions({
-        ProductAdd: 'ProductAdd',
-      })
-    }
-    methods: mapActions([
-      'getCategories'
-    ]),    
-    created(){
-      this.getCategories()
-    },
-         addProduct(){
-        this.$store.dispatch('ProductAdd', this.product);
-      }
-=======
     computed: {
       ...mapActions({
         ProductAdd: 'ProductAdd',
@@ -174,7 +156,6 @@
         this.$store.dispatch('ProductAdd', this.product);
       }
     }
->>>>>>> 48b0f434aaf77f614db69632106236b4b280c53d
   }
 
 </script>

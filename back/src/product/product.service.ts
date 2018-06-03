@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { Category } from 'entities/Category';
 import { WishToBuy } from 'entities/wishtobuy';
 import { User } from 'entities/User';
+import { ProductProperty } from 'entities/ProductProperty';
 
 @Component()
 export class ProductService {
@@ -75,5 +76,14 @@ export class ProductService {
                                        .where("product.name like :name", {name: '%' + name + '%' })
                                        .getMany();
   }
+
+  async getProperties(product): Promise<ProductProperty[]> {
+      const newproduct =  await this.productRepository.createQueryBuilder("product")
+                                             .where("product.id = :id", {id: product})
+                                             .leftJoinAndSelect("product.properties", "ProductProperty")
+                                             .getOne()
+      return newproduct.properties;
+  }
+  
 
 }

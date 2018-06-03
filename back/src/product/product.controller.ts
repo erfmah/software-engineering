@@ -117,4 +117,20 @@ export class ProductController {
     }
   }
 
+  @Post('getProperties')
+  async getProperties(@Body() data, @Res() res): Promise<any> {
+    let properties = await this.productService.getProperties(data['id'])
+    if(properties == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "there_is_no_property";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['properties'] = properties;
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
 }
