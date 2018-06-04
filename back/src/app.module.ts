@@ -9,8 +9,11 @@ import { ProductModule } from './product/product.module';
 import { ManufacturerModule} from './manufacturer/manufacturer.module'
 import { CartModule } from 'cart/cart.module';
 import { OrderModule } from 'order/order.module';
+import { ProductPropertyModule } from 'productProperty/productProperty.module'
+import { ImageModule } from 'image/image.module'
+
 @Module({
-  imports: [UserModule, AuthModule, ProductModule, CategoryModule, ManufacturerModule,OrderModule, CartModule, TypeOrmModule.forRoot()],
+  imports: [UserModule, AuthModule, ImageModule,  ProductModule, CategoryModule, ManufacturerModule, OrderModule, ProductPropertyModule, CartModule, TypeOrmModule.forRoot()],
   controllers: [AppController],
   components: [],
 })
