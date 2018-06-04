@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus, Req} from '@nestjs/common';
+import { Render, Controller, Get, UseGuards, Post, Body, Res, HttpStatus, Req} from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service'
 import * as bcrypt from 'bcrypt';
@@ -6,6 +6,12 @@ import * as bcrypt from 'bcrypt';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService, private readonly authService: AuthService) {}
+
+  @Get('login')
+  @Render('login')
+  loginRender() {
+
+  }
 
   @Post('create')
   async createUser(@Body() data, @Res() res): Promise<any> {
@@ -41,6 +47,7 @@ export class UserController {
   }
   @Post('login')
   async login(@Body() data, @Res() res): Promise<any> {
+    
       let result = {};
       let code;
 	  if (data['phone'] && data['password']) {

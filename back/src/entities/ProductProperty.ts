@@ -14,7 +14,7 @@ export class ProductProperty {
     key: string;
 
     @Column({ type: "varchar"})
-    value: number;
+    value: string;
 
     @ManyToMany(type => Product, product => product.properties)
     products: Product[];
