@@ -47,7 +47,6 @@ export class CartService {
 		const cart = await this.createCart(user)
 		if (cart) {
 			const cartDetail = (await this.cartDetailsRepository.find({where:{ cart, product }, relations:["product"]}))[0]
-			console.log({ cart, product })
 			if (cartDetail) {
 				try {
 					cartDetail.product.productStock = cartDetail.product.productStock + cartDetail.quantity

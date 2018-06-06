@@ -69,6 +69,8 @@ export class AppController {
 	@Get('cart/deleteitem/:id')
 	async deleteItem(@Res() res, @Session() session, @Req() req, @Param() params) {
 		await this.cartService.deleteFromCart(params.id, session.user.id)
+		const cart = await this.cartService.createCart(session.user.id)
+		await this.cartService.computeCartAmount(cart.id)
 		res.redirect("/")
 	}	
 	
