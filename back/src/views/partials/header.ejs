@@ -1,0 +1,122 @@
+<div id="header" class="header">
+    <div class="top-header">
+        <div class="container">
+            <div id="user-info-top" class="user-info pull-right">
+                <div class="dropdown">
+                    <% if (!(user.id)) {%>
+                        <a href="/user/login"><span>Login</span></a>
+                    <%} else {%>
+                        <a href="#"><span>Hi! <%= user.firstName %></span></a>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.top-header -->
+    <!-- MAIN HEADER -->
+    <div class="container main-header">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 logo">
+                <a href="/"><img alt="Kute shop - themelot.net" src="/assets/data/option6/logo.png" /></a>
+            </div>
+            <div class="col-xs-7 col-sm-8 col-md-7 header-search-box">
+                <form class="form-inline" method="GET" action="/search">
+                      <div class="form-group input-serach">
+                        <input name="key" type="text"  placeholder="Keyword here...">
+                      </div>
+                      <button type="submit" class="pull-right btn-search"></button>
+                </form>
+            </div>
+            <% if (user.id) {%>
+                <div class="col-xs-5 col-sm-3 col-md-2 group-button-header">
+                    <a title="My wishlist" href="/wishlist" class="btn-heart">wishlist</a>
+                    <% if (cart ) {%>
+                        <div class="btn-cart" id="cart-block">
+                            <a title="My cart" href="/order">Cart</a>
+                            <span class="notify notify-right"><%= cartItems.length %></span>
+                            <div class="cart-block">
+                                <div class="cart-block-content">
+                                    <h5 class="cart-title"><%= cartItems.length %> items in cart</h5>
+                                    <div class="cart-block-list">
+                                        <ul>
+                                        <% cartItems.forEach(function(p) { %>
+                                            <li class="product-info">
+                                                    <div class="p-left">
+                                                        <a href="/cart/deleteitem/<%= p.product.id %>" class="remove_link"></a>
+                                                        <a href="#">
+                                                        <img class="img-responsive" src="<%= p.product.images[0].path %>" alt="<%= p.product.images[0].alt %>">
+                                                        </a>
+                                                    </div>
+                                                    <div class="p-right">
+                                                        <p class="p-name"><%= p.product.name %></p>
+                                                        <p class="p-rice"><%= p.price %> $</p>
+                                                        <p>Qty: <%= p.quantity %></p>
+                                                    </div>
+                                                </li>
+                                        <% }) %>
+                                    </ul>
+                                    </div>
+                                    <div class="toal-cart">
+                                        <span>Total</span>
+                                        <span class="toal-price pull-right"><%= cart.amount %> $</span>
+                                    </div>
+                                    <div class="cart-buttons">
+                                        <a href="/order" class="btn-check-out">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+
+                </div>
+            <%}%>
+        </div>
+        
+    </div>
+    <!-- END MANIN HEADER -->
+    <div id="nav-top-menu" class="nav-top-menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3" id="box-vertical-megamenus">
+                    <div class="box-vertical-megamenus">
+                    <h4 class="title">
+                        <span class="btn-open-mobile"><i class="fa fa-bars"></i></span>
+                    </h4>
+                    <div class="vertical-menu-content is-home">
+                        <ul class="vertical-menu-list">
+                            <% categories.forEach(function(cat){ %>
+                                <li><a href="/category/<%=cat['id']%>"> <%= cat['name'] %></a></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                <div id="main-menu" class="col-sm-9 main-menu">
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                                <a class="navbar-brand" href="#">MENU</a>
+                            </div>
+                            <div id="navbar" class="navbar-collapse collapse">
+                            </div><!--/.nav-collapse -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- userinfo on top-->
+            <div id="form-search-opntop">
+            </div>
+            <!-- userinfo on top-->
+            <div id="user-info-opntop">
+            </div>
+            <!-- CART ICON ON MMENU -->
+            <div id="shopping-cart-box-ontop">
+                <i class="fa fa-shopping-cart"></i>
+                <div class="shopping-cart-box-ontop-content"></div>
+            </div>
+        </div>
+    </div>
+</div>

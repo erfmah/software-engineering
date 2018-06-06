@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus, UseInterceptors, FileInterceptor, UploadedFile     } from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus, UseInterceptors, FileInterceptor, FilesInterceptor, UploadedFile, UploadedFiles     } from '@nestjs/common';
 import { ImageService } from './image.service';
 import * as bcrypt from 'bcrypt';
 import * as fs from 'fs';
@@ -8,8 +8,11 @@ export class ImageController {
   constructor(private readonly imageService: ImageService) {}
   
   @Post('create')
-  async createImage(@Body() data, @Res() res): Promise<any> {
-    let data_of = await this.imageService.create(data['alt'], data['path']);
+  @UseInterceptors(FilesInterceptor('images'))
+  async createImages(@Body() data, @Res() res, @UploadedFiles() files): Promise<any> {
+    console.log(files)
+    return
+    let data_of = await this.imageService.create(data['alt'], data['path'], files);
     if (data_of != null) {
         let result = {};
         result['data'] = {};

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./partials/head %>
+    <title>Gandom e Abi</title>
+</head>
+<body class="option6">
+<!-- HEADER -->
+    <% include ./partials/header %>    
+<!-- end header -->
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="#" title="Return to Home">Home</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">Fashion</span>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- row -->
+        <div class="row">
+            <% include ./partials/left %>    
+            <!-- Center colunm-->
+            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+                <!-- category-slider -->
+                <div class="category-slider">
+                    <ul class="owl-carousel owl-style2" data-dots="false" data-loop="true" data-nav = "true" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-items="1">
+                        <% found.forEach(function(p) { %>
+                            <li>
+                                <img src="<%= p.images[0].path %>" alt="<%= p.images[0].alt %>">
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+                <!-- ./category-slider -->
+                <!-- ./subcategories -->
+                <!-- view-product-list-->
+                <div id="view-product-list" class="view-product-list">
+                    <h2 class="page-heading">
+                        <span class="page-heading-title"><%= foundname %></span>
+                    </h2>
+                    <ul class="display-product-option">
+                        <li class="view-as-grid selected">
+                            <span>grid</span>
+                        </li>
+                        <li class="view-as-list">
+                            <span>list</span>
+                        </li>
+                    </ul>
+                    <!-- PRODUCT LIST -->
+                    <ul class="row product-list grid">
+                        <% found.forEach(function(p) { %>
+                            <li class="col-sx-12 col-sm-4">
+                                <div class="product-container">
+                                    <div class="left-block">
+                                        <a href="/product/<%= p.id %>">
+                                            <img class="img-responsive" alt="<%= p.images[0].alt %>" src="<%= p.images[0].path %>" />
+                                        </a>
+                                        <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="/product/wishlist/add/<%= p.id %>?redirect=/"></a>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <a title="Add to Cart" href="/cart/addToCart/<%= p.id %>?redirect=/">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="right-block">
+                                        <h5 class="product-name"><a href="#"><%= p.name %></a></h5>
+                                        <div class="content_price">
+                                            <span class="price product-price">$<%= p.price %></span>
+                                        </div>
+                                        <div class="info-orther">
+                                            <p>Item Code: # <%= p.id %></p>
+                                            <p class="availability">Availability: 
+                                                <% if (p.live < 1 || p.productStock < 1){ %> 
+                                                    <span>Out Of Stock</span> 
+                                                <% } else {%>
+                                                    <span>In Stock</span> 
+                                                <% } %>
+                                                </p>
+                                            <div class="product-desc">
+                                                <%= p.longDesc %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        <% }) %>
+                    </ul>
+                    <!-- ./PRODUCT LIST -->
+                </div>
+                <!-- ./view-product-list-->
+            </div>
+            <!-- ./ Center colunm -->
+        </div>
+        <!-- ./row-->
+    </div>
+</div>
+
+<!-- Footer -->
+<footer id="footer">
+        <% include ./partials/footer %>
+    </footer>
+    
+    <% include ./partials/script %>
+    
+    </body>
+    </html>

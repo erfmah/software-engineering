@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./partials/head %>
+    <title>Gandom e Abi</title>
+</head>
+<body class="option6">
+<!-- HEADER -->
+    <% include ./partials/header %>    
+<!-- end header -->
+
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="#" title="Return to Home">Home</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <a href="#" title="Return to Home">My account</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">My wishlist</span>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- row -->
+        <div class="row">
+            <!-- Left colunm -->
+            <div class="column col-xs-12 col-sm-3" id="left_column">
+                <!-- block best sellers -->
+                <div class="block left-module">
+                    
+                    <p class="title_block">New products</p>
+                    <div class="block_content">
+                        <ul class="products-block best-sell">
+                                <% lastProducts.forEach(function(p) { %>
+                                <li>
+                                    <div class="products-block-left">
+                                        <a href="/product/<%= p.id %>">
+                                            <img src="<%= p.images[0].path %>" alt="<%= p.images[0].alt %>">
+                                        </a>
+                                    </div>
+                                    <div class="products-block-right">
+                                        <p class="product-name">
+                                            <a href="#"><%= p.name %></a>
+                                        </p>
+                                        <p class="product-price">$<%= p.price %></p>
+                                    </div>
+                                </li>
+                                <% }) %>
+                            </ul>
+                    </div>
+
+                </div>
+                <!-- ./block best sellers  -->
+                
+                <!-- left silide -->
+                <div class="col-left-slide left-module">
+                    <ul class="owl-carousel owl-style2" data-loop="true" data-nav = "false" data-margin = "0" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-items="1" data-autoplay="true">
+                        <% lastProducts.forEach(function(p) { %>
+                        <li><a href="<%= p.images[0].id %>"><img src="<%= p.images[0].path %>" alt="<%= p.images[0].alt %>"></a></li>
+                        <% }) %>
+                    </ul>
+                </div>
+                <!--./left silde-->
+                <!-- block best sellers -->
+                <!-- ./block best sellers  -->
+            </div>
+            <!-- ./left colunm -->
+            <!-- Center colunm-->
+            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+               <!-- page heading-->
+                <h2 class="page-heading">
+                    <span class="page-heading-title2">My wishlist</span>
+                </h2>
+                <ul class="row list-wishlist">
+                    <% wishlist.forEach(function(p) { %>
+                    <li class="col-sm-3">
+                        <div class="product-img">
+                            <a href="/product/<%= p.product.id %>"><img src="<%= p.product.images[0].path %>" alt="<%= p.product.images[0].alt %>"></a>
+                        </div>
+                        <h5 class="product-name">
+                            <a href="#"><%= p.product.name %></a>
+                        </h5>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <!-- ./ Center colunm -->
+        </div>
+        <!-- ./row-->
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer id="footer">
+        <% include ./partials/footer %>
+    </footer>
+    
+    <% include ./partials/script %>
+    
+    </body>
+    </html>

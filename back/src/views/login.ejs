@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./partials/head %>
+    <title>Gandom e Abi</title>
+</head>
+<body class="option6">
+<!-- HEADER -->
+    <% include ./partials/header %>    
+<!-- end header -->
+<!-- page wapper-->
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="#" title="Return to Home">Home</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">Authentication</span>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- page heading-->
+        <h2 class="page-heading">
+            <span class="page-heading-title2">Authentication</span>
+        </h2>
+        <!-- ../page heading-->
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="box-authentication">
+                        <h3>Create an account</h3>
+                        <p>Please enter your email address to create an account.</p>
+                        <form method="POST" action="/user/signup">
+                            <label for="Phone">Phone</label>
+                            <input id="Phone" type="text" class="form-control" name="phone">
+                            <label for="Email">Email</label>
+                            <input id="Email" type="email" class="form-control" name="email">
+                            <label for="Firstname">Firstname</label>
+                            <input id="Firstname" type="text" class="form-control" name="firstName">
+                            <label for="Lastname">Lastname</label>
+                            <input id="Lastname" type="text" class="form-control" name="lastName">
+                            <label for="datepicker">Birthdate</label>
+                            <input id="datepicker" type="text" class="form-control" id="datepicker" name="birthdate">
+                            <label for="Password">Password</label>
+                            <input id="Password" type="password" class="form-control" name="password">
+                            <label for="Retype Password">Retype Password</label>
+                            <input id="Retype Password" type="password" class="form-control" name="password_r">
+                            <button class="button"><i class="fa fa-user"></i> Create an account</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="box-authentication">
+                        <form method="POST" action="/user/signin">
+                            <h3>Already registered?</h3>
+                            <label for="emmail_login">Phone</label>
+                            <input name="phone" id="emmail_login" type="text" class="form-control">
+                            <label for="password_login">Password</label>
+                            <input name="password" id="password_login" type="password" class="form-control">
+                            <button class="button"><i class="fa fa-lock"></i> Sign in</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ./page wapper-->
+<footer id="footer">
+        <% include ./partials/footer %>
+    </footer>
+<a href="#" class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>
+<!-- Script-->
+<script type="text/javascript" src="/assets/lib/jquery/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/lib/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="/assets/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="/assets/lib/owl.carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/assets/lib/jquery.countdown/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="/assets/lib/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.actual.min.js"></script>
+<script type="text/javascript" src="/assets/js/theme-script.js"></script>
+<script>
+        $( function() {
+          $( "#datepicker" ).datepicker();
+        } );
+        </script>
+</body>
+</html>

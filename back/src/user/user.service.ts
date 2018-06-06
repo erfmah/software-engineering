@@ -39,6 +39,10 @@ export class UserService {
     return await this.userRepository.findOne({phone});
   }
 
+  async findById(id): Promise<User> {
+    return (await this.userRepository.find({where:{id}, relations:["addresses"]}))[0];
+  }
+
   async authorize(phone, password): Promise<boolean> {
     let user = await this.findByPhone(phone);
     if (user == null) {

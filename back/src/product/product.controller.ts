@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus, Req } from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Body, Res, HttpStatus, Req, Session, UseInterceptors, FilesInterceptor, UploadedFiles, Param, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { AuthService } from '../auth/auth.service'
 import * as bcrypt from 'bcrypt';
@@ -8,7 +8,9 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
   
   @Post('create')
-  async createProduct(@Body() data, @Res() res): Promise<any> {
+  @UseInterceptors(FilesInterceptor('images'))
+  async createProduct(@Body() data, @Res() res, @UploadedFiles() files): Promise<any> {
+    data['images'] = files
     let product_already = await this.productService.findByName(data ['name'])
     if(product_already) {
       let result = {};
@@ -20,7 +22,7 @@ export class ProductController {
       if(data_of != null) {
         let result = {};
         result['data'] = {};
-        result['data']['product'] = data_of;
+        result['data']['product'] = {id: data_of.id};
         result['status'] = "success";
         res.status(HttpStatus.OK).json(result);
        } else {
@@ -46,6 +48,35 @@ export class ProductController {
       result['data']['wishToBuy'] = wishItem;
       result['status'] = "success";
       res.status(HttpStatus.OK).json(result);
+    }
+  }
+
+  @Post('addWishS')
+  async addToWishListSession(@Body() data, @Res() res, @Req() req, @Session() session): Promise<any> {
+    let wishItem = await this.productService.addToWishList(session.user.id, data['product'])
+    if(wishItem == null) {
+      let result = {};
+      result['data'] = {};
+      result['status'] = "product_already_exist_in_wishList";
+      res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+    } else{
+      let result = {};
+      result['data'] = {};
+      result['data']['wishToBuy'] = wishItem;
+      result['status'] = "success";
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
+
+  @Get('wishlist/add/:id')
+  async addToWishListSessionGet(@Body() data, @Res() res, @Req() req, @Session() session, @Param() params, @Query() query): Promise<any> {
+    let wishItem = await this.productService.addToWishList(session.user.id, params.id)
+    if(wishItem == null) {
+      // res.status(HttpStatus.NOT_ACCEPTABLE).json(result);
+      res.redirect(query.redirect)
+    } else{
+      // res.status(HttpStatus.OK).json(result);
+      res.redirect(query.redirect)
     }
   }
 

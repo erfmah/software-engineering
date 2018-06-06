@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./partials/head %>
+    <title>Gandom e Abi</title>
+</head>
+<body class="option6">
+<!-- HEADER -->
+    <% include ./partials/header %>    
+<!-- end header -->
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="/" title="Return to Home">Home</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <a href="/category/<%= product.category.id %>" title="Return to Home"><%= product.category.name %></a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <a href="#" title="Return to Home"><%= product.name %></a>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- row -->
+        <div class="row">
+            <!-- Left colunm -->
+            <% include ./partials/left %>
+            <!-- ./left colunm -->
+            <!-- Center colunm-->
+            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+                <!-- Product -->
+                    <div id="product">
+                        <div class="primary-box row">
+                            <div class="pb-left-column col-xs-12 col-sm-6">
+                                <!-- product-imge-->
+                                <div class="product-image">
+                                    <div class="product-full">
+                                        <img id="product-zoom" src='<%= product.images[0].path %>' data-zoom-image="<%= product.images[0].path %>"/>
+                                    </div>
+                                    <div class="product-img-thumb" id="gallery_01">
+                                        <ul class="owl-carousel" data-items="3" data-nav="true" data-dots="false" data-margin="20" data-loop="true">
+                                            <% product.images.forEach(function(p) { %> 
+                                                <li>
+                                                    <a href="#" data-image="<%= p.path %>" data-zoom-image="<%= p.path %>">
+                                                        <img id="product-zoom"  src="<%= p.path %>" /> 
+                                                    </a>
+                                                </li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- product-imge-->
+                            </div>
+                            <div class="pb-right-column col-xs-12 col-sm-6">
+                                <h1 class="product-name"><%= product.name %></h1>
+                                <div class="product-price-group">
+                                    <span class="price">$<%= product.price %></span>
+                                </div>
+                                <div class="info-orther">
+                                    <p>Item Code: # <%= product.id %></p>
+                                    <p>Availability: 
+                                            <% if (product.live < 1 || product.productStock < 1){ %> 
+                                                <span >Out Of Stock</span> 
+                                            <% } else {%>
+                                                <span class="in-stock">In Stock</span> 
+                                            <% } %>
+                                            </p>
+                                </div>
+                                <div class="product-desc">
+                                    <%= product.longDesc %>
+                                </div>
+                                <div class="form-action">
+                                    <div class="button-group">
+                                        <a class="btn-add-cart" href="/cart/addToCart/<%= product.id %>?redirect=/product/<%= product.id %>">Add to cart</a>
+                                    </div>
+                                    <div class="button-group">
+                                        <a class="wishlist" href="/product/wishlist/add/<%= product.id %>?redirect=/product/<%= product.id %>"><i class="fa fa-heart-o"></i>
+                                        <br>Wishlist</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab product -->
+                        <div class="product-tab">
+                            <ul class="nav-tab">
+                                <li class="active">
+                                    <a aria-expanded="false" data-toggle="tab" href="#product-detail">Product Details</a>
+                                </li>
+                                <li>
+                                    <a aria-expanded="true" data-toggle="tab" href="#information">information</a>
+                                </li>
+                            </ul>
+                            <div class="tab-container">
+                                <div id="product-detail" class="tab-panel active">
+                                    <%= product.longDesc %>
+                                </div>
+                                <div id="information" class="tab-panel">
+                                    <table class="table table-bordered">
+                                        <% product.properties.forEach(function(p) { %> 
+                                        <tr>
+                                            <td><%= p.key %></td>
+                                            <td><%= p.value %></td>
+                                        </tr>
+                                        <% }) %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ./tab product -->
+                        <!-- box product -->
+                        <div class="page-product-box">
+                            <h3 class="heading">Related Products</h3>
+                            <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav = "true" data-margin = "30" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":3}}'>
+                                    <% categories.forEach(function(p) { %> 
+                                <li>
+                                    
+                                        <div class="product-container">
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="<%= p.images[0].alt %>" src="<%= p.images[0].path %>" />
+                                                </a>
+                                                <div class="quick-view">
+                                                        <a title="Add to my wishlist" class="heart" href="/product/wishlist/add/<%= p.id %>?redirect=/product/<%= product.id %>"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="/cart/addToCart/<%= p.id %>?redirect=/product/<%= product.id %>">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#"><%= p.name %></a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$<%= p.price %></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                        <!-- ./box product -->
+                    </div>
+                <!-- Product -->
+            </div>
+            <!-- ./ Center colunm -->
+        </div>
+        <!-- ./row-->
+    </div>
+</div>
+
+<!-- Footer -->
+<footer id="footer">
+        <% include ./partials/footer %>
+    </footer>
+<a href="#" class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>
+<!-- Script-->
+<script type="text/javascript" src="/assets/lib/jquery/jquery-1.11.2.min.js"></script>
+
+<script type="text/javascript" src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/lib/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="/assets/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="/assets/lib/owl.carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/assets/lib/jquery.countdown/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="/assets/lib/jquery.elevatezoom.js"></script>
+
+<script type="text/javascript" src="/assets/lib/jquery-ui/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="/assets/lib/fancyBox/jquery.fancybox.js"></script>
+
+<script type="text/javascript" src="/assets/js/jquery.actual.min.js"></script>
+
+
+<script type="text/javascript" src="/assets/js/theme-script.js"></script>
+
+</body>
+</html>

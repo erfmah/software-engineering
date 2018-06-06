@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./partials/head %>
+    <title>Gandom e Abi</title>
+</head>
+<body class="option6">
+<!-- HEADER -->
+    <% include ./partials/header %>    
+<!-- end header -->
+<!-- Home slideder-->
+<div id="home-slider">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8" style="padding-right: 0px;">
+                <div class="homeslider">
+                    <ul id="contenhomeslider-customPage">
+                      <% slider.forEach(function(p) { %>
+                      <li><img alt="<%= p.images[0].alt %>" src="<%= p.images[0].path %>" title="<%= p.images[0].alt %>" /></li>
+                      <%})%>
+                    </ul>
+                    <div class="bx-control">
+                        <div class="slide-prev">
+                            <span id="bx-prev"></span>
+                        </div>
+                        <div id="bx-pager" class="slide-pager">
+                              <a data-slide-index="0" href="">1</a>
+                              <a data-slide-index="1" href="">2</a>
+                              <a data-slide-index="2" href="">3</a>
+                        </div>
+                        <div class="slide-next">
+                            <span id="bx-next"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 group-banner-slider" style="padding-left: 2px;">
+                <% slider.forEach(function(p) { %>
+                    <div class="item banner-opacity">
+                        <a href="/product/<%= p.id %>"><img src="<%= p.images[0].path %>" alt="<%= p.images[0].alt %>"></a>
+                    </div>
+                <%})%>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-page">
+    <div class="container">
+        <!-- featured category fashion -->
+        <div class="category-featured fashion">
+            <nav class="navbar nav-menu show-brand">
+              <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                  <div class="navbar-brand"><a href="#">HOT</a></div>
+                  <span class="toggle-menu"></span>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse">           
+                  <ul class="nav navbar-nav">
+                    <li class="active"><a data-toggle="tab" href="#tab-4">Latest</a></li>
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+           <div class="product-featured clearfix">
+                <div class="row">
+                    <div class="col-sm-2 sub-category-wapper">
+                        <ul class="sub-category-list">
+                            <% categories.forEach(function(cat){ %>
+                                <li><a href="/?latest=<%=cat['id']%>"> <%= cat['name'] %></a></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                    <div class="col-sm-10 col-right-tab">
+                        <div class="product-featured-tab-content">
+                            <div class="tab-container">
+                                <div class="tab-panel active" id="tab-4">
+                                   <div class="box-left">
+                                   </div>
+                                   <div class="box-right">
+                                       <ul class="product-list row">
+                                                
+                                            <% latest.forEach(function(p){ %>
+                                                <li class="col-sm-4">
+                                                    <div class="right-block">
+                                                        <h5 class="product-name"><a href="/product/<%= p.id %>"><%= p.name %></a></h5>
+                                                        <div class="content_price">
+                                                            <span class="price product-price">$<%= p.price %></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="left-block">
+                                                        <a href="/product/<%= p.id %>"><img style="width: 268px; height: 327px;" alt="product" src="<%= p.images[0].path %>" /></a>
+                                                        <% if(user.id) {%>
+                                                        <div class="quick-view">
+                                                                <a title="Add to my wishlist" class="heart" href="/product/wishlist/add/<%= p.id %>?redirect=/"></a>
+                                                        </div>
+                                                        <% } %>
+                                                        <div class="add-to-cart">
+                                                            <a title="Add to Cart" href="/cart/addToCart/<%= p.id %>?redirect=/">Add to Cart</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            <% }); %> 
+                                                
+                                       </ul>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+        <!-- end featured category fashion -->
+    </div>
+</div>
+
+<!-- <div id="content-wrap">
+    <div class="container">
+        <div class="band-logo owl-carousel"  data-dots="false" data-loop="true" data-nav = "true" data-margin = "1.2" data-autoplay="true" data-responsive='{"0":{"items":3},"600":{"items":5},"1000":{"items":8}}'>
+            <a href="#"><img src="assets/data/option6/band-logo.png" alt="Band logo"></a>
+            <a href="#"><img src="assets/data/option6/band-logo.png" alt="Band logo"></a>
+            <a href="#"><img src="assets/data/option6/band-logo.png" alt="Band logo"></a>
+            <a href="#"><img src="assets/data/option6/band-logo.png" alt="Band logo"></a>
+            <a href="#"><img src="assets/data/option6/band-logo.png" alt="Band logo"></a>
+            <a href="#"><img src="assets/data/option6/band-logo.png" alt="Band logo"></a>
+            <a href="#"><img src="assets/data/option6/band-logo.png" alt="Band logo"></a>
+            <a href="#"><img src="assets/data/option6/band-logo.png" alt="Band logo"></a>
+        </div>
+    </div> <!-- /.container -->
+</div>
+
+<!-- Footer -->
+<footer id="footer">
+    <% include ./partials/footer %>
+</footer>
+
+<% include ./partials/script %>
+
+</body>
+</html>
